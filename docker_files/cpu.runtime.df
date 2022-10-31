@@ -1,0 +1,27 @@
+FROM python:3.6-buster
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# Install Apt packages
+RUN apt-get update --fix-missing
+RUN apt-get install -y apt-utils
+RUN apt-get install -y sudo
+RUN apt-get install -y gcc
+RUN apt-get install -y libcurl4 libcurl4-openssl-dev libssl-dev curl
+RUN apt-get install -y libzmq3-dev
+RUN rm -rf /var/lib/apt/lists/*
+
+# Install Python packages
+RUN pip install --upgrade pip
+RUN pip install Cython==0.29.14
+RUN pip install pyaml==20.4.0
+RUN pip install pyzmq==19.0.2
+RUN pip install numpy==1.19.1
+RUN pip install torch==1.6.0
+RUN pip install tabulate==0.8.5
+RUN pip install redis
+RUN pip install psutil==5.7.2
+RUN pip install deepdiff==5.0.2
+
+# Install maro
+RUN pip install pymaro
